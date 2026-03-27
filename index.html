@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Evelym</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .tela {
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    #tela1, #tela7 {
+        background: linear-gradient(135deg, #000, #111, #000);
+        color: white;
+    }
+
+    #tela1 h1, #tela7 h1 {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 30px;
+    }
+
+    button {
+        padding: 12px 26px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    #sim, #simBelem {
+        background: #00c853;
+        color: white;
+    }
+
+    #nao, #naoBelem {
+        background: #d50000;
+        color: white;
+        position: absolute;
+    }
+
+    .stars {
+        background: black url("https://i.imgur.com/9yKZthF.png") center/cover no-repeat;
+        color: white;
+    }
+
+    .fade-text {
+        font-size: 28px;
+        max-width: 700px;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .next-btn {
+        margin-top: 40px;
+        padding: 12px 24px;
+        background: #ffffff22;
+        border: 1px solid white;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .input-box {
+        margin-top: 20px;
+        padding: 12px;
+        width: 260px;
+        font-size: 18px;
+        border-radius: 6px;
+        border: none;
+    }
+
+    #telaFinal {
+        background: linear-gradient(180deg, #fde3ea, #ffd6e2);
+        color: #8a0f3d;
+        display: none;
+        padding-top: 40px;
+    }
+
+    #finalName {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    #finalText {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+
+  #finalText2 {
+    font-size: 20px;
+    margin-bottom: 40px;
+    font-weight: bold;
+   }
+
+    #countContainer {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 25px;
+        box-shadow: 0 0 20px #d8aab8;
+        display: flex;
+        gap: 25px;
+    }
+
+    .countBox {
+        padding: 15px 20px;
+        border-radius: 14px;
+        background: #fff3f7;
+        color: #8a0f3d;
+        font-size: 22px;
+        font-weight: bold;
+        min-width: 90px;
+        box-shadow: 0 0 10px #e6b8c6;
+    }
+
+    .countLabel {
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: normal;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- TELA 1 -->
+<div id="tela1" class="tela" style="display:flex;">
+    <h1>Hey, senhorita. Deixa eu te perguntar: Você já sorriu hoje?</h1>
+
+    <div class="buttons">
+        <button id="sim">Sim</button>
+        <button id="nao">Não</button>
+    </div>
+</div>
+
+<!-- TELA 2 -->
+<div id="tela2" class="tela stars">
+    <h2 class="fade-text">
+        Dias pensativos ultimamente, né?<br>
+        Bom, me da 30 segundos do seu tempo, pode ser?
+    </h2>
+
+    <button class="next-btn" id="paraTela3">Clica aqui então...Vai, clica aqui</button>
+</div>
+
+<!-- TELA 3 -->
+<div id="tela3" class="tela stars">
+    <h2 class="fade-text">Mas antes de continuarmos...<br>Me diga seu nome, so para ter certeza que é você rs</h2>
+
+    <input type="text" id="nome" class="input-box" placeholder="Digite seu nome">
+    <button class="next-btn" id="validaNome">Continuar</button>
+
+    <p id="erro" style="color:#ff6b6b; display:none;">Nome incorreto! Ta de brincation with me??</p>
+</div>
+
+<!-- TELA 4 -->
+<div id="tela4" class="tela stars">
+    <h2 class="fade-text">Quantos anos você tem? Essa pergunta tem duas respostas possiveis.</h2>
+
+    <input type="number" id="idade" class="input-box" placeholder="Idade">
+    <button class="next-btn" id="validaIdade">Continuar</button>
+
+    <p id="erroIdade" style="display:none; color:#ff6b6b;">Idade incorreta, acho que você está mentindo...</p>
+
+    <p id="msgPoliana" style="display:none; color:#ffccf5; margin-top:10px; font-size:20px;">
+        Hey, então estou falando com a Poliana?
+    </p>
+</div>
+
+<!-- TELA 5 (alterada) -->
+<div id="tela5" class="tela stars">
+    <h2 class="fade-text">Bom, me diga o nome de uma das suas crianças. Essa não tem como errar.</h2>
+
+    <input type="text" id="racao" class="input-box" placeholder="Digite aqui">
+    <button class="next-btn" id="continuarRacao">Continuar</button>
+
+    <p id="erroCrianca" style="display:none; color:#ff6b6b;">
+        Opa, acho que você esqueceu, talvez? Bom, mães não esquecem o nome das suas crianças, né?
+    </p>
+
+    <p id="acertouCrianca" style="display:none; color:#b8ffc4; margin-top:10px; font-size:20px;">
+        Hummm… Tu é realmente a mãe delas.
+    </p>
+</div>
+
+<!-- TELA 6 -->
+<div id="tela6" class="tela stars">
+    <h2 class="fade-text">E qual é a sua comida preferida? Pelo menos, enquanto estava em Fortaleza haha</h2>
+    <input type="text" id="comida" class="input-box" placeholder="Digite aqui">
+    <button class="next-btn" id="validaComida">Itadakimassu</button>
+
+    <p id="erroComida" style="display:none; color:#ff6b6b;">
+        Resposta incorreta (dica: tem CAMARÃO!)
+    </p>
+</div>
+
+<!-- TELA 7 -->
+<div id="tela7" class="tela">
+    <h1>Você está ansiosa para as suas férias em Belém no mês de maio?</h1>
+
+    <div class="buttons">
+        <button id="simBelem">Estou</button>
+        <button id="naoBelem">Não</button>
+    </div>
+</div>
+
+<!-- TELA FINAL -->
+<div id="telaFinal" class="tela">
+    <div id="finalName">Evelym</div>
+    <div id="finalText">Muito bom, aguenta mais pouco então! Jajá você vai estar com sua mãe, sua irmã...</div>
+    <div id="finalText">Mas até lá...Faz um favor para elas, para mim, para suas crianças e para o mundo todo.</div>
+    <div id="finalText2">Sorria mais. Sorria até seus maxilares doerem. Sorria a noite toda, se possivel.</div>
+
+    <div id="countContainer">
+        <div class="countBox">
+            <div id="years">00</div>
+            <div class="countLabel">Years</div>
+        </div>
+        <div class="countBox">
+            <div id="months">00</div>
+            <div class="countLabel">Months</div>
+        </div>
+        <div class="countBox">
+            <div id="days">00</div>
+            <div class="countLabel">Days</div>
+        </div>
+        <div class="countBox">
+            <div id="hours">00</div>
+            <div class="countLabel">Hours</div>
+        </div>
+        <div class="countBox">
+            <div id="minutes">00</div>
+            <div class="countLabel">Minutes</div>
+        </div>
+        <div class="countBox">
+            <div id="seconds">00</div>
+            <div class="countLabel">Seconds</div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+/* ====================== TROCAR TELAS ====================== */
+function trocar(a, b) {
+    document.getElementById(a).style.display = "none";
+    document.getElementById(b).style.display = "flex";
+}
+
+/* ====================== BOTÃO FUJÃO ====================== */
+function botaoFujao(id) {
+    const b = document.getElementById(id);
+    const frases = [
+        "Não",
+        "Talvez",
+        "Nem",
+        "Não estou com vontade...",
+        "Eh complicado",
+        "Pergunta difícil, será?",
+        "Ah, deixa pra lá, não vai mudar nada, vai?"
+    ];
+    let i = 0;
+
+    b.addEventListener("mouseover", () => {
+        b.textContent = frases[i];
+        i = (i + 1) % frases.length;
+
+        const size = Math.floor(Math.random() * 18) + 16;
+        b.style.fontSize = size + "px";
+        b.style.padding = `${size/2}px ${size}px`;
+
+        const maxX = window.innerWidth - 150;
+        const maxY = window.innerHeight - 80;
+        b.style.left = (Math.random() * maxX) + "px";
+        b.style.top = (Math.random() * maxY) + "px";
+    });
+}
+
+botaoFujao("nao");
+botaoFujao("naoBelem");
+
+/* ====================== TELA 1 → 2 ====================== */
+document.getElementById("sim").onclick = function() {
+    trocar("tela1","tela2");
+};
+
+/* ====================== TELA 2 → 3 ====================== */
+document.getElementById("paraTela3").onclick = function() {
+    trocar("tela2","tela3");
+};
+
+/* ====================== NOME ====================== */
+document.getElementById("validaNome").onclick = function() {
+    let nomeDigitado = document.getElementById("nome").value.trim().toLowerCase();
+    let permitidos = ["evelym", "poliana", "poli"];
+
+    if (!permitidos.includes(nomeDigitado)) {
+        document.getElementById("erro").style.display = "block";
+        return;
+    }
+
+    trocar("tela3","tela4");
+};
+
+/* ====================== IDADE ====================== */
+let jaPerguntouPoliana = false;
+
+document.getElementById("validaIdade").onclick = function() {
+    let idadeValor = Number(document.getElementById("idade").value);
+
+    let validas = [25, 27, 28];
+
+    if (!validas.includes(idadeValor)) {
+        document.getElementById("erroIdade").style.display = "block";
+        return;
+    }
+
+    if (idadeValor === 25 && !jaPerguntouPoliana) {
+        document.getElementById("msgPoliana").style.display = "block";
+        jaPerguntouPoliana = true;
+        return;
+    }
+
+    trocar("tela4","tela5");
+};
+
+/* ====================== TELA 5 — NOME DAS CRIANÇAS ====================== */
+let acertouCriancaUmaVez = false;
+
+document.getElementById("continuarRacao").onclick = function() {
+    let resp = document.getElementById("racao").value.trim().toLowerCase();
+
+    const validos = ["layka", "laika", "halley", "frida"];
+
+    if (!acertouCriancaUmaVez) {
+        if (!validos.includes(resp)) {
+            document.getElementById("erroCrianca").style.display = "block";
+            return;
+        }
+
+        document.getElementById("acertouCrianca").style.display = "block";
+        acertouCriancaUmaVez = true;
+        return;
+    }
+
+    trocar("tela5","tela6");
+};
+
+/* ====================== COMIDA ====================== */
+document.getElementById("validaComida").onclick = function() {
+    let comida = document.getElementById("comida").value.toLowerCase();
+
+    if (!comida.includes("camarão") && !comida.includes("camarao")) {
+        document.getElementById("erroComida").style.display = "block";
+        return;
+    }
+
+    trocar("tela6","tela7");
+};
+
+/* ====================== TELA 7 → FINAL ====================== */
+document.getElementById("simBelem").onclick = function() {
+    trocar("tela7","telaFinal");
+};
+
+/* ====================== COUNTDOWN ====================== */
+function atualizarContagem() {
+    const destino = new Date("May 05, 2026 00:00:00").getTime();
+    const agora = new Date().getTime();
+    const diff = destino - agora;
+
+    if (diff < 0) return;
+
+    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+    const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+    const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("years").innerText = String(years).padStart(2, '0');
+    document.getElementById("months").innerText = String(months).padStart(2, '0');
+    document.getElementById("days").innerText = String(days).padStart(2, '0');
+    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+}
+
+setInterval(atualizarContagem, 1000);
+
+</script>
+
+</body>
+</html>
